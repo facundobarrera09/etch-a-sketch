@@ -24,8 +24,8 @@ body {
 }
 
 .grid {
-    width: 640px;
-    height: 640px;
+    width: 60vh;
+    height: 60vh;
 
     display: flex;
     flex-direction: column;
@@ -40,17 +40,17 @@ body {
 }
 
 .controls {
-    max-width: 600px;
-    min-height: 100px;
+    max-width: 45vh;
+    min-height: 10vh;
 
     display: flex;
     flex-wrap: wrap;
 
-    gap: 50px;
+    gap: 2vh;
 }
 
 .palette {
-    max-width: 200px;
+    max-width: 20vh;
 
     display: flex;
     justify-content: space-around;
@@ -58,14 +58,14 @@ body {
 }
 
 .color-square {
-    width: 32px;
-    height: 32px;
+    width: 4vh;
+    height: 4vh;
 
-    margin: 10px;
+    margin: 1vh;
 }
 
 .rgb-code {
-    max-width: 200px;
+    max-width: 20vh;
 }
 
 footer {
