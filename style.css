@@ -40,6 +40,11 @@ body {
     width: 100%;
 }
 
+.color-square {
+    width: 32px;
+    height: 32px;
+}
+
 footer {
     margin-top: auto;
 }

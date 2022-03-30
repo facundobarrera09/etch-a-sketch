@@ -10,7 +10,7 @@ const rgbBlue = document.querySelector('#rgb-blue');
 
 // Variables and constants
 
-const predefinedColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+let predefinedColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 
 let gridSize = 16;
 let color = 'red';
@@ -60,6 +60,33 @@ function paintSquare(e)
     this.style['background-color'] = color;
 }
 
+function setColor(newColor)
+{
+    color = newColor;
+}
+
+function setColorPalette(colors)
+{
+    predefinedColors = colors;
+
+    // Add squares
+    let square;
+
+    for (let x = 0; x < predefinedColors.length; x++)
+    {
+        square = document.createElement('div');
+        square.classList.add('color-square');
+        square.setAttribute('data-id', `${x}`);
+        square.style['background-color'] = predefinedColors[x];
+
+        square.addEventListener('click', () => {
+            setColor(predefinedColors[x]);
+        });
+
+        colorsPalette.appendChild(square);
+    }
+}
+
 // Event listeners
 
 function setSquaresListeners()
@@ -70,3 +97,4 @@ function setSquaresListeners()
 // Grid setup
 
 setGrid(gridSize);
+setColorPalette(predefinedColors);
