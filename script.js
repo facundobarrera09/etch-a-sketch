@@ -4,6 +4,7 @@ let gridSquares, gridLines;
 const colorsPalette = document.querySelector('.palette');
 const currentColorSelector = document.querySelector('.current-color');
 
+const rgbInputs = document.querySelectorAll('.rgb input');
 const rgbRed = document.querySelector('#rgb-red');
 const rgbGreen = document.querySelector('#rgb-green');
 const rgbBlue = document.querySelector('#rgb-blue');
@@ -62,17 +63,13 @@ function paintSquare(e)
 
 function setColor(newColor)
 {
-    console.log(colorValues(newColor));
     let newColorValues = colorValues(newColor);
-
-    color = 'rgb(' + newColorValues.join(',') + ')';
-    console.log(color);
+    newColor = 'rgb(' + newColorValues.join(',') + ')';
+    color = newColor;
 
     currentColorSelector.style['background-color'] = color;
 
-    rgbRed.value = newColorValues[0];
-    rgbGreen.value = newColorValues[1];
-    rgbBlue.value = newColorValues[2];
+    console.log(this);
 }
 
 function setColorPalette(colors)
@@ -97,26 +94,49 @@ function setColorPalette(colors)
     }
 }
 
-const colorValues = color => {
-    /**
-     * Convert any color string to an [r,g,b,a] array.
-     * @author Arjan Haverkamp (arjan-at-avoid-dot-org)
-     * @param {string} color Any color. F.e.: 'red', '#f0f', '#ff00ff', 'rgb(x,y,x)', 'rgba(r,g,b,a)', 'hsl(180, 50%, 50%)'
-     * @returns {array} [r,g,b,a] array. Caution: returns [0,0,0,0] for invalid color.
-     */
-    const div = document.createElement('div');
-    div.style.backgroundColor = color;
-    document.body.appendChild(div);
-    let rgba = getComputedStyle(div).getPropertyValue('background-color');
-    div.remove();
-
-    if (rgba.indexOf('rgba') === -1) {
-        rgba += ',1'; // convert 'rgb(R,G,B)' to 'rgb(R,G,B)A' which looks awful but will pass the regxep below
-    }
-
-    return rgba.match(/[\.\d]+/g).map(a => {
-        return +a
-    });
+function colorValues(color)
+{
+    // NOT MY CODE - look at README.md
+    // return array of [r,g,b,a] from any valid color. if failed returns undefined
+	if (!color)
+		return;
+	if (color.toLowerCase() === 'transparent')
+		return [0, 0, 0, 0];
+	if (color[0] === '#')
+	{
+		if (color.length < 7)
+		{
+			// convert #RGB and #RGBA to #RRGGBB and #RRGGBBAA
+			color = '#' + color[1] + color[1] + color[2] + color[2] + color[3] + color[3] + (color.length > 4 ? color[4] + color[4] : '');
+		}
+		return [parseInt(color.substr(1, 2), 16),
+			parseInt(color.substr(3, 2), 16),
+			parseInt(color.substr(5, 2), 16),
+			color.length > 7 ? parseInt(color.substr(7, 2), 16)/255 : 1];
+	}
+	if (color.indexOf('rgb') === -1)
+	{
+		// convert named colors
+		var temp_elem = document.body.appendChild(document.createElement('fictum')); // intentionally use unknown tag to lower chances of css rule override with !important
+		var flag = 'rgb(1, 2, 3)'; // this flag tested on chrome 59, ff 53, ie9, ie10, ie11, edge 14
+		temp_elem.style.color = flag;
+		if (temp_elem.style.color !== flag)
+			return; // color set failed - some monstrous css rule is probably taking over the color of our object
+		temp_elem.style.color = color;
+		if (temp_elem.style.color === flag || temp_elem.style.color === '')
+			return; // color parse failed
+		color = getComputedStyle(temp_elem).color;
+		document.body.removeChild(temp_elem);
+	}
+	if (color.indexOf('rgb') === 0)
+	{
+		if (color.indexOf('rgba') === -1)
+			color += ',1'; // convert 'rgb(R,G,B)' to 'rgb(R,G,B)A' which looks awful but will pass the regxep below
+		return color.match(/[\.\d]+/g).map(function (a)
+		{
+			return +a
+		});
+	}
 }
 
 // Event listeners
@@ -125,6 +145,26 @@ function setSquaresListeners()
 {
     gridSquares.forEach(square => square.addEventListener('mouseover', paintSquare));
 }
+
+rgbInputs.forEach(rgbInput => {
+    rgbInput.addEventListener('input', () => {
+        let newColorValues = [];
+        
+        rgbInputs.forEach(input => {
+            if (input.value == '' || isNaN(rgbInput.value)) return;
+
+            let tempValue = parseInt(input.value);
+            if (tempValue >= 0 && tempValue <= 255)
+                newColorValues.push(input.value);
+        });
+
+        if (newColorValues.length === 3)
+        {
+            let newColor = 'rgb(' + newColorValues.join(',') + ')';
+            setColor(newColor);
+        }
+    });
+});
 
 // Grid setup
 
