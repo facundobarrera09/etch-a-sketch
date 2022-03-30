@@ -1,0 +1,32 @@
+* {
+    outline: 1px solid red;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid {
+    width: 640px;
+    height: 640px;
+}
+
+footer {
+    margin-top: auto;
+}
