@@ -13,7 +13,7 @@ const rgbBlue = document.querySelector('#rgb-blue');
 let predefinedColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 
 let gridSize = 16;
-let color = 'red';
+let color = 'none';
 
 // Functions
 
@@ -62,7 +62,17 @@ function paintSquare(e)
 
 function setColor(newColor)
 {
-    color = newColor;
+    console.log(colorValues(newColor));
+    let newColorValues = colorValues(newColor);
+
+    color = 'rgb(' + newColorValues.join(',') + ')';
+    console.log(color);
+
+    currentColorSelector.style['background-color'] = color;
+
+    rgbRed.value = newColorValues[0];
+    rgbGreen.value = newColorValues[1];
+    rgbBlue.value = newColorValues[2];
 }
 
 function setColorPalette(colors)
@@ -85,6 +95,28 @@ function setColorPalette(colors)
 
         colorsPalette.appendChild(square);
     }
+}
+
+const colorValues = color => {
+    /**
+     * Convert any color string to an [r,g,b,a] array.
+     * @author Arjan Haverkamp (arjan-at-avoid-dot-org)
+     * @param {string} color Any color. F.e.: 'red', '#f0f', '#ff00ff', 'rgb(x,y,x)', 'rgba(r,g,b,a)', 'hsl(180, 50%, 50%)'
+     * @returns {array} [r,g,b,a] array. Caution: returns [0,0,0,0] for invalid color.
+     */
+    const div = document.createElement('div');
+    div.style.backgroundColor = color;
+    document.body.appendChild(div);
+    let rgba = getComputedStyle(div).getPropertyValue('background-color');
+    div.remove();
+
+    if (rgba.indexOf('rgba') === -1) {
+        rgba += ',1'; // convert 'rgb(R,G,B)' to 'rgb(R,G,B)A' which looks awful but will pass the regxep below
+    }
+
+    return rgba.match(/[\.\d]+/g).map(a => {
+        return +a
+    });
 }
 
 // Event listeners
