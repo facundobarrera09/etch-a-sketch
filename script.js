@@ -4,6 +4,8 @@ let gridSquares, gridLines;
 const colorsPalette = document.querySelector('.palette');
 const currentColorSelector = document.querySelector('.current-color');
 
+const sizeButton = document.querySelector('#size-button');
+
 const rgbInputs = document.querySelectorAll('.rgb input');
 const rgbRed = document.querySelector('#rgb-red');
 const rgbGreen = document.querySelector('#rgb-green');
@@ -68,8 +70,6 @@ function setColor(newColor)
     color = newColor;
 
     currentColorSelector.style['background-color'] = color;
-
-    console.log(this);
 }
 
 function setColorPalette(colors)
@@ -164,6 +164,14 @@ rgbInputs.forEach(rgbInput => {
             setColor(newColor);
         }
     });
+});
+
+sizeButton.addEventListener('click', () => {
+    let newSize = prompt('Enter grid\'s new size:');
+
+    if (newSize !== null && newSize != '')
+        if (newSize >= 1 && newSize <= 100)
+            setGrid(newSize);
 });
 
 // Grid setup
