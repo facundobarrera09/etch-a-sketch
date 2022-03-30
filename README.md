@@ -8,4 +8,4 @@ The project is meant to put to practise what I have leart during the course.
 This includes: DOM manipulation, event listeners, writing clean code, arrays, loops, etc.
 
 Imported code:
- - colorValues function: https://gist.github.com/av01d/
+ - colorValues function: https://gist.github.com/oriadam/396a4beaaad465ca921618f2f2444d49
