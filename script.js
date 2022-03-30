@@ -9,8 +9,16 @@ const rgbBlue = document.querySelector('#rgb-blue');
 
 // Functions
 
+function resetGrid()
+{
+    let gridSquares = document.querySelectorAll('.grid div.line');
+    gridSquares.forEach(square => grid.removeChild(square));
+}
+
 function setGrid(size)
 {
+    resetGrid();
+
     // Add squares
     let line, square;
 
