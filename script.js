@@ -8,7 +8,9 @@ const rgbRed = document.querySelector('#rgb-red');
 const rgbGreen = document.querySelector('#rgb-green');
 const rgbBlue = document.querySelector('#rgb-blue');
 
-// Variables
+// Variables and constants
+
+const predefinedColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 
 let gridSize = 16;
 let color = 'red';
