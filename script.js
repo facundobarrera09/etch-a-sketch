@@ -1,7 +1,7 @@
 // HTML elements
 const grid = document.querySelector('.grid');
 let gridSquares, gridLines;
-const colorsPalette = document.querySelector('.colors');
+const colorsPalette = document.querySelector('.palette');
 const currentColorSelector = document.querySelector('.current-color');
 
 const rgbRed = document.querySelector('#rgb-red');

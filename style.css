@@ -1,6 +1,5 @@
 * {
     outline: 1px solid red;
-    box-sizing: border-box;
 }
 
 body {
@@ -40,9 +39,33 @@ body {
     width: 100%;
 }
 
+.controls {
+    max-width: 600px;
+    min-height: 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 50px;
+}
+
+.palette {
+    max-width: 200px;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 .color-square {
     width: 32px;
     height: 32px;
+
+    margin: 10px;
+}
+
+.rgb-code {
+    max-width: 200px;
 }
 
 footer {
