@@ -66,6 +66,23 @@ body {
 
 .rgb-code {
     max-width: 20vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rgb-code span {
+    margin-bottom: 0.6vh;
+}
+
+.rgb {
+    width: 100%;
+    display: flex;
+}
+
+.rgb input {
+    width: 5vh;
 }
 
 footer {
