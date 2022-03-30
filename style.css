@@ -25,6 +25,17 @@ body {
 .grid {
     width: 640px;
     height: 640px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    height: 100%;
+    display: flex;
+}
+.square {
+    width: 100%;
 }
 
 footer {
