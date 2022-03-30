@@ -9,3 +9,4 @@ This includes: DOM manipulation, event listeners, writing clean code, arrays, lo
 
 Imported code:
  - colorValues function: https://gist.github.com/oriadam/396a4beaaad465ca921618f2f2444d49
+ - color palette: https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FFEE58&secondary.color=FF3D00
