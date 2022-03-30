@@ -5,4 +5,7 @@ This proyect consist on a resizeable grid of divs which changes color when hover
 
 The project is meant to put to practise what I have leart during the course.
 
-This includes: DOM manipulation, event listeners, writing clean code, arrays, loops, etc.S
+This includes: DOM manipulation, event listeners, writing clean code, arrays, loops, etc.
+
+Imported code:
+ - colorValues function: https://gist.github.com/av01d/
